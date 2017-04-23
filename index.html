@@ -9,74 +9,46 @@
 		<link rel="stylesheet" href="css/mui.min.css" />
 		<link rel="stylesheet" href="css/main.css" />
 
-		<script src="js/mui.min.js"></script>
-		<script src="js/jquery-3.2.1.min.js"></script>
-
-		<script type="text/javascript" charset="utf-8">
-			mui.init();
-		</script>
-
 		<script>
-		var data;
-		$(function() {
+			//		var data;
+			//		$(function() {
+			//			
+			//			// 定义对象
+			//			var o = [];
+			//			o.push({ id : 1, desc : 'aaa'});
+			//			o.push({ id : 2, desc : 'aaa'});
+			//
+			//			for(var i = 0; i < o.length; i++) {
+			//				if (o[i].id == 1) {
+			//					o[i].desc = 'new object';
+			//				}	
+			//			}
+			//			$.ajax({
+			//				url : "http://15002b0n47.iask.in/question/suspector/findSuspectorList.do",
+			//				data : {
+			//					inspectorId : 111,
+			//					pageIndex : 0,
+			//					pageSize : 100
+			//					
+			//				},
+			//				async : false,
+			//				success : function(text) {debugger;
+			//					data = text.data
+			//				},
+			//				error : function() {
+			//					alert('操作失败，请稍后再试。');
+			//				}
+			//			});
+			//			if (data) {
+			//				alert(JSON.stringify(data));
+			//				object json = JSON.parse(jsonStr);
+			//				var temp;
+			//				for(var i = 0; i < data.length; i++) {
+			//					temp = data[i];
+			//				}
+			//			}
+			//		});
 			
-			// 定义对象
-			var o = [];
-			o.push({ id : 1, desc : 'aaa'});
-			o.push({ id : 2, desc : 'aaa'});
-
-			for(var i = 0; i < o.length; i++) {
-				if (o[i].id == 1) {
-					o[i].desc = 'new object';
-				}	
-			}
-			$.ajax({
-				url : "http://15002b0n47.iask.in/question/suspector/findSuspectorList.do",
-				data : {
-					inspectorId : 111,
-					pageIndex : 0,
-					pageSize : 100
-					
-				},
-				async : false,
-				success : function(text) {debugger;
-					data = text.data
-				},
-				error : function() {
-					alert('操作失败，请稍后再试。');
-				}
-			});
-			if (data) {
-				alert(JSON.stringify(data));
-				object json = JSON.parse(jsonStr);
-				var temp;
-				for(var i = 0; i < data.length; i++) {
-					temp = data[i];
-				}
-			}
-		});
-			$(document).ready(function() {
-				$("#btnClose").click(function() {
-					var btnArray = ['确定', '取消'];
-					mui.confirm('是否确定退出？', '提示', btnArray, function(e) {
-						if(e.index == 0) {
-							//确定退出
-						} else {
-							//取消退出
-						}
-					})
-				});
-
-				$("#btnforward").click(function() {
-					//切换下一题
-					//修改标题的索引
-					$("#index").text("题目 2/50");
-					$("#title").text("电影《盗梦空间》的主角是下列哪一位?");
-					$("#itemsGroup").empty();
-					
-					$("#itemsGroup").html("<div class='mui-input-row mui-checkbox mui-left'><label>" + data[i].desc + "</label><input name='checkbox' value='Item 1' type='checkbox'></div>");
-				});
-			});
 		</script>
 	</head>
 
@@ -116,9 +88,65 @@
 		</div>
 
 		<div class="footer">
-			<img id="btnClose" src="images/close.png" style="width: 15px;height: 15px">
-			<span id="btnforward" style="position:absolute;right:0px;" class="mui-icon mui-icon-forward"></span>
+			<img id="btnClose" src="images/close.png" class="close" />
+			<img id="btnPrevious" src="images/previous.png" class="previous" />
+			<img id="btnforward" src="images/forward.png" class="forward" />
 		</div>
 	</body>
+
+	<script src="js/mui.min.js"></script>
+	<script src="js/jquery-3.2.1.min.js"></script>
+
+	<script type="text/javascript" charset="utf-8">
+		mui.init();
+		//选项选中触发
+		mui('.mui-input-group').on('change', 'input', function() {
+			alert("当前选择了第:" + this.value + "项");
+		});
+		
+		$(document).ready(function() {
+				$("#btnClose").click(function() {
+					var btnArray = ['确定', '取消'];
+					mui.confirm('是否确定退出？', '提示', btnArray, function(e) {
+						if(e.index == 0) {
+							//确定退出
+						} else {
+							//取消退出
+						}
+					})
+				});
+
+				$("#btnPrevious").click(function() {
+					//回到上一题
+					refreshSubject(1,"这是上一题，什么jb题目",0)
+				});
+
+				$("#btnforward").click(function() {
+					refreshSubject(2, "这是个什么鬼的题目,下一题",1);
+				});
+
+				//刷新题目
+				function refreshSubject(index, title,type) {
+					$("#index").text("题目 " + index + "/50");
+					$("#title").text(title);
+					$("#itemsGroup").empty();
+
+					var itemContent = "当前选项";
+
+					for(var i = 0; i < 4; i++) {
+						if(type == 0){
+							//多选题
+							var itemHtml = "<div class='mui-input-row mui-checkbox mui-left'><label>" +
+							itemContent + "</label><input name='checkbox' value='" + i + "' type='checkbox'></div>";
+						}else{
+							//单选题
+							var itemHtml = "<div class='mui-input-row mui-radio mui-left'><label>" +
+							itemContent + "</label><input name='radio' value='" + i + "' type='radio'></div>";
+						}
+						$("#itemsGroup").append(itemHtml);
+					}
+				}
+			});
+	</script>
 
 </html>

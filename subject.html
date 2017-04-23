@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div class="mui-card">
+			<!--页眉，放置标题-->
+			<div id="index" class="mui-card-header">题目 1/50</div>
+			<!--内容区-->
+			<div class="mui-card-content">
+				<div id="title" class="mui-card-content-inner" style="height: 120px">
+					凉宫春日是哪一部动漫作品的主角？
+				</div>
+			</div>
+			<!--页脚，放置补充信息或支持的操作-->
+			<div class="mui-card-footer"></div>
+		</div>
+
+		<div class="mui-card">
+			<form id="itemsGroup" class="mui-input-group">
+				<div class="mui-input-row mui-checkbox mui-left">
+					<label>A、选项1</label>
+					<input name="checkbox" value="Item 1" type="checkbox">
+				</div>
+				<div class="mui-input-row mui-checkbox mui-left">
+					<label>B、选项2</label>
+					<input name="checkbox" value="Item 2" type="checkbox">
+				</div>
+				<div class="mui-input-row mui-checkbox mui-left">
+					<label>C、选项3</label>
+					<input name="checkbox" value="Item 2" type="checkbox">
+				</div>
+				<div class="mui-input-row mui-checkbox mui-left">
+					<label>C、选项4</label>
+					<input name="checkbox" value="Item 2" type="checkbox">
+				</div>
+			</form>
+		</div>
+
+		<div class="footer">
+			<img id="btnClose" src="images/close.png" style="width: 30px;height: 30px ">
+			<img id="btnforward" src="images/forward.png" style="width: 30px;height: 30px;position:absolute;right:0px;top: 50%;margin-top: -15px;margin-right: 10px; " />
+		</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			
+			mui('.mui-input-group').on('change', 'input', function() {
+			var value = this.previousSibling;
+			alert(value.innerHTML);
+		});
+		</script>
+	</body>
+
+</html>
