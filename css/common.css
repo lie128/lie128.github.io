@@ -1,0 +1,10 @@
+/*body{
+	background: url(../img/bg_main.png) no-repeat;
+	background-size: 100% 100% ;
+}*/
+.shadow{
+	box-shadow:0px 1px 2px #666 inset, 0px -1px 2px inset;          /* For Latest Opera */
+	-moz-box-shadow:0px 1px 2px #666 inset,0px -1px 2px inset;     /* For Firefox3.6+ */
+	-webkit-box-shadow:0px 1px 2px #666 inset,0px -1px 2px inset;  /* For Chrome5+, Safari5+ */
+}
+
