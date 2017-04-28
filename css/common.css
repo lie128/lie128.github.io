@@ -1,0 +1,60 @@
+html,body {
+    height: 100%;
+    position: relative;
+}
+
+body:before {
+  content: ' ';
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: url(../img/bg_main.png) center 0 no-repeat;
+  background-size: cover;
+}
+
+body{
+	background: url(../img/bg_main.png) no-repeat;
+	background-size: 100% 100% ;
+	font: normal 100% Helvetica, Arial, sans-serif;
+}
+
+.logo{
+	width: 100%;
+	margin: 0 auto;
+	display: block;
+}
+
+/*search*/
+.search{
+	width:95%;
+	height: 35px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 3%;
+	margin-top: 2%;
+	border: 2px solid #34383c;
+	border-radius: 25px;
+}
+.search input{
+	width: 80%;
+	height: 30px;
+	background-color: transparent;
+	border: none;
+	color: white;
+	font-size: 14px;
+}
+
+.search img{
+	margin: 0px 5px 5px 5px;
+	width:20px;
+	height: 20px;
+}
+
+.shadow{
+	box-shadow:0px 1px 2px #ffffff inset, 0px -1px 2px inset;          /* For Latest Opera */
+	-moz-box-shadow:0px 1px 2px #ffffff inset,0px -1px 2px inset;     /* For Firefox3.6+ */
+	-webkit-box-shadow:0px 1px 2px #ffffff inset,0px -1px 2px inset;  /* For Chrome5+, Safari5+ */
+}

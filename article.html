@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>文章列表</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/feedback2.css" />
+		<link rel="stylesheet" type="text/css" href="css/footerbasic.css" />
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+
+		<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<div class="content">
+				<img class="logo" src="img/zte.png" alt="" />
+				
+				<ul class="list-group list_group_m center-block" id="message-board" style="width: 95%; margin: 20px auto;">
+					
+				</ul>
+			</div>
+		</div>
+		<footer class="navbar-fixed-bottom">
+			<div class="footer-nav right-bordered col-xs-6 col-sm-6 shadow" style="margin-right: 2%;">
+				<a href="index.html"><img src="img/home.png" />首页</a>
+			</div>
+			<div class="footer-nav col-xs-6 col-sm-6 shadow">
+				<a href="center.html"><img src="img/center.png">个人中心</a>
+			</div>
+		</footer>
+
+		<script src="js/getHeight.js"></script>
+		<script>
+			$(document).ready(function() {
+				console.log("开始加载");
+				var categoryid = getUrl(window.location.href, true).categoryid;
+				var superid = getUrl(window.location.href, true).superid;
+				$.ajax({
+					type: "post",
+					url: "http://library.html5case.cn/Hesi/findArticle",
+					dataType: "json",
+					data: {
+						category: categoryid,
+						superid: superid
+					},
+					success: function(result) {
+						console.dir(result);
+						if(result.code == -2) {
+							console.log("查找失败");
+						} else if(result.code == -1) {
+							console.log("文章不存在");
+						} else {
+							var i;
+							var liHtml = "<li class='list-group-item shadow' style='background-color: transparent; color: white; padding: 15px 5px;'>";
+							var imgHtml = "<img style='margin-bottom:10px; margin-right:10px;' src='img/point.png'/>";
+							for(i = 0; i < result.data.length; i++) {
+								$("#message-board").append(liHtml + "<a href='showcontent.html?articleid=" + result.data[i].id + "'>" + imgHtml + "<h3 style='display: inline; color: white;'>" + result.data[i].title + "</h3></a></li>");
+							}
+						}
+					}
+				});
+			});
+
+			function getUrl(url, isEncode) {
+				url = url || window.location.href;
+				var obj = {},
+					reg = /([^?&=]+)=([^?&=]+)/g;
+				url.replace(reg, function() {
+					var arg = arguments;
+					obj[arg[1]] = isEncode ? decodeURIComponent(arg[2]) : arg[2];
+				});
+				return obj;
+			}
+		</script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script>
+			//分享
+			var shareImgUrl = "http://hesi.html5case.cn/img/share.jpg";
+			var shareLinkUrl = window.location.href;
+			var shareTitle = "中兴政企通讯" + document.title;
+			var shareDesc = "未来，不等待";
+			var url = encodeURIComponent(window.location.href);
+			//配置
+			$.ajax({
+				type: "post",
+				dataType: "json",
+				url: "http://library.html5case.cn/Hesi/jssdk",
+				data: {
+					url: url
+				},
+				success: function(result) {
+					console.dir(result);
+					callback(result);
+				}
+			});
+
+			function callback(config) {
+				wx.config(config);
+				wx.ready(function() {
+					wx.onMenuShareAppMessage({
+						title: shareTitle,
+						desc: shareDesc,
+						link: shareLinkUrl,
+						imgUrl: shareImgUrl,
+						success: function(res) {}
+					});
+					wx.onMenuShareTimeline({
+						title: shareDesc,
+						link: shareLinkUrl,
+						imgUrl: shareImgUrl,
+						success: function(res) {}
+					});
+				});
+			}
+		</script>
+	</body>
+
+</html>
