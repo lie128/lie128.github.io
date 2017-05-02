@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>个人中心</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/center.css" />
+		<link rel="stylesheet" type="text/css" href="css/footerbasic.css" />
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+
+		<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+	</head>
+
+	<body>
+		<script src="js/getHeight.js"></script>
+
+		<div id="wrapper">
+			<div class="content">
+				<img class="logo" src="img/zte.png" alt="" />
+				
+				<div class="person">
+					<img src="" id="userHead"/>
+					<br />
+					<span id="userName"></span>
+				</div>
+
+				<div class="list-group_content">
+					<a href="feedback2.html?" class="list-group-item" style="border-top-left-radius: 18px;border-top-right-radius: 18px;">
+						<div class="section">
+							<img src="img/speechbubble.png" />
+							<span>我的提问</span>
+						</div>
+					</a>
+					<a href="register1.html" class="list-group-item">
+						<div class="section">
+							<img src="img/compose.png" />
+							<span>完善信息</span>
+						</div>
+					</a>
+					<a href="contactus.html" class="list-group-item" style="border-bottom-left-radius: 18px;border-bottom-right-radius: 18px;">
+						<div class="section">
+							<img src="img/headphones.png" />
+							<span>联系客服</span>
+						</div>
+					</a>
+				</div>
+
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<footer class="navbar-fixed-bottom">
+			<div class="footer-nav right-bordered col-xs-6 col-sm-6">
+				<a href="index.html"><img src="img/home.png" />首页</a>
+			</div>
+			<div class="footer-nav col-xs-6 col-sm-6">
+				<a href="center.html"><img src="img/center.png">个人中心</a>
+			</div>
+		</footer>
+	</body>
+	<script>
+		$(function() {
+			var openid = localStorage.getItem("openid");
+			if(openid) {
+				$.ajax({
+					url: 'http://library.html5case.cn/Hesi/getCurUser',
+					type: 'post',
+					data: {
+						openid: openid
+					},
+					dataType: 'json',
+					success: function(data) {
+						$('#userHead').attr('src', data.data[0].headimgurl);
+						$('#userName').text(data.data[0].nickname);
+					}
+				});
+			} else {
+				window.location.href = 'register2.html';
+			}
+		});
+	</script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script>
+		//分享
+		var shareImgUrl = "http://hesi.html5case.cn/img/share.jpg";
+		var shareLinkUrl = window.location.href;
+		var shareTitle = "中兴政企通讯" + document.title;
+		var shareDesc = "未来，不等待";
+		var url = encodeURIComponent(window.location.href);
+		//配置
+		$.ajax({
+			type: "post",
+			dataType: "json",
+			url: "http://library.html5case.cn/Hesi/jssdk",
+			data: {
+				url: url
+			},
+			success: function(result) {
+				console.dir(result);
+				callback(result);
+			}
+		});
+
+		function callback(config) {
+			wx.config(config);
+			wx.ready(function() {
+				wx.onMenuShareAppMessage({
+					title: shareTitle,
+					desc: shareDesc,
+					link: shareLinkUrl,
+					imgUrl: shareImgUrl,
+					success: function(res) {}
+				});
+				wx.onMenuShareTimeline({
+					title: shareDesc,
+					link: shareLinkUrl,
+					imgUrl: shareImgUrl,
+					success: function(res) {}
+				});
+			});
+		}
+	</script>
+
+</html>
