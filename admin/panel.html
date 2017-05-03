@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>主控面板</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="./ue/ueditor.config.js"></script>
+    <script src="./ue/ueditor.all.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .leftSide{
+            float: left;
+            width: 50%;
+        }
+        .rightSide{
+            float: right;
+            width: 50%;
+        }
+        .rightSide p{
+            width: 5%;
+            float: left;
+            line-height: 100px;
+            text-align: center;
+        }
+        .phonePanel{
+            height: 480px;
+            border: 1px solid grey;
+            width: 320px;
+            border-radius: 10px;
+            margin: 0 auto;
+        }
+        .phonePanel ul{
+            position: relative;
+            float: left;
+            list-style: none;
+            width: 33%;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            bottom: -445px;
+            left: 2px;
+        }
+        .phonePanel ul li{
+            border: 1px solid grey;
+            background-color: #D6D6D6;
+        }
+        .formContainer{
+            margin: 0 auto;
+        }
+        .menuContent{
+            width: 45%;
+            float: left;
+            height: 100px !important;
+        }
+
+        #submitAddMenu{
+            float: right;
+        }
+        #submitDeleteMenu{
+            float: right;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">和思公众号管理后台</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navContainer">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#user">用户管理</a>
+                </li>
+                <li>
+                    <a href="#message">留言信息管理</a>
+                </li>
+                <li>
+                    <a href="#article">文章管理</a>
+                </li>
+                <li>
+                    <a href="#type">分类管理</a>
+                </li>
+                <li>
+                    <a data-toggle="modal" data-target="#articleModal">添加文章</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">登出</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container" id="user" >
+    <button type="button" class="btn getUserXLS" style="margin: 5px;">导出用户信息</button>
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th style="width: 10%">微信昵称</th>
+            <th style="width: 10%">姓名</th>
+            <th>行业</th>
+            <th>公司</th>
+            <th>邮箱</th>
+            <th>电话</th>
+            <th style="width: 15%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<div class="container" id="message" style="display: none;">
+    <button type="button" class="btn getMessageXLS" style="margin: 5px;">导出留言信息</button>
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th style="width: 10%">留言用户</th>
+                <th style="width: 5%">行业</th>
+                <th style="width: 5%">公司</th>
+                <th style="width: 10%">用户邮箱</th>
+                <th style="width: 10%">用户电话</th>
+                <th>留言内容</th>
+                <th>回复内容</th>
+                <th style="width: 15%">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<div class="container" id="article" style="display: none;">
+    <div class="form-group">
+        <select class="form-control" id="articleChose" style="margin: 5px;width: 10%;float: left;">
+            <option curid="4">未分类</option>
+            <option curid="1" selected>产品介绍</option>
+            <option curid="2">解决方案</option>
+            <option curid="3">成功案例</option>
+        </select>
+        <button type="button" class="btn getTypeArticle" style="margin: 5px;float: left;">查找</button>
+    </div>
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th style="width: 10%">所属类目</th>
+            <th style="width: 10%">所属板块</th>
+            <th>标题</th>
+            <th>作者</th>
+            <th>创建时间</th>
+            <th style="width: 15%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<div class="container" id="type" style="display: none">
+    <div class="form-group">
+        <select class="form-control" id="subCategoryChose" style="margin: 5px;width: 10%;float: left;">
+            <option curid="4">未分类</option>
+            <option curid="1">产品介绍</option>
+            <option curid="2">解决方案</option>
+            <option curid="3">成功案例</option>
+        </select>
+        <button type="button" class="btn getTypeCategory" style="margin: 5px;float: left;">查找</button>
+        <!--<a data-toggle="modal" class="btn" data-target="#typeModal" style="margin: 5px;float: left;">添加分类</a>-->
+        <button type="button" class="btn typeAddBtn" style="margin: 5px;float: left;">添加分类</button>
+    </div>
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th style="width: 10%">上级分类</th>
+            <th style="width: 5%">分类标题</th>
+            <th style="width: 15%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<!--回复留言模态框-->
+<div class="modal fade" id="replayModal">
+    <div class="modal-dialog" style="width: 800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">回复</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="replayBody">回复内容</label>
+                    <textarea class="form-control" id="replayBody" style="height: 400px;"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="replaySubmit">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--文章模态框-->
+<div class="modal fade" id="articleModal">
+    <div class="modal-dialog" style="width:1500px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">添加文章</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="articleTitle">文章标题</label>
+                    <input type="text" class="form-control" id="articleTitle" />
+                </div>
+                <div class="form-group">
+                    <label for="articleAuthor">文章作者</label>
+                    <input type="text" class="form-control" id="articleAuthor" />
+                </div>
+                <div class="form-group">
+                    <label for="articleAuthor">文章关键字(多个关键字用,隔开)</label>
+                    <input type="text" class="form-control" id="articleKey" />
+                </div>
+                <div class="form-group">
+                    <label for="articleAuthor">其他链接</label>
+                    <input type="text" class="form-control" id="otherLink" />
+                </div>
+                <div class="form-group" id="subCategory">
+                    <label>所属板块:</label>
+                    <div class="radio">
+                        <label>
+                            <input id="noCheck" type="radio" name="subCategory" value="4" checked>
+                            未分类
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input id="proCheck" type="radio" name="subCategory" value="1" checked>
+                            产品介绍
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input id="jiejueCheck" type="radio" name="subCategory" value="2" checked>
+                            解决方案
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input id="chenggongCheck" type="radio" name="subCategory" value="3" checked>
+                            成功案例
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group" id="articleCategory">
+                    <label>所属分类:</label>
+                </div>
+                <div class="form-group">
+                    <label>文章内容</label>
+                    <script id="articleBody" name="content" type="text/plain"></script>
+                </div>
+            </div>
+            <div class="modal-footer" style="text-align: center">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="articleSubmit">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--文章修改模态框-->
+<div class="modal fade" id="articleModifyModal">
+    <div class="modal-dialog" style="width:1500px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改文章</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="articleTitle">文章标题</label>
+                    <input type="text" class="form-control" id="articleModifyTitle" />
+                </div>
+                <div class="form-group">
+                    <label for="articleAuthor">文章作者</label>
+                    <input type="text" class="form-control" id="articleModifyAuthor" />
+                </div>
+                <div class="form-group">
+                    <label for="articleAuthor">文章关键字(多个关键字用,隔开)</label>
+                    <input type="text" class="form-control" id="articleModifyKey" />
+                </div>
+                <div class="form-group">
+                    <label for="articleAuthor">其他链接</label>
+                    <input type="text" class="form-control" id="otherModifyLink" />
+                </div>
+                <div class="form-group" id="modifySubCategory">
+                    <label>所属板块:</label>
+                    <div class="radio">
+                        <label>
+                            <input id="modifyNoCheck" type="radio" name="modifySubCategory" value="4" checked>
+                            未分类
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input id="modifyProCheck" type="radio" name="modifySubCategory" value="1" checked>
+                            产品介绍
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input id="modifyJiejueCheck" type="radio" name="modifySubCategory" value="2" checked>
+                            解决方案
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input id="modifyChenggongCheck" type="radio" name="modifySubCategory" value="3" checked>
+                            成功案例
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group" id="articleModifyCategory">
+                    <label>所属分类:</label>
+                </div>
+                <div class="form-group">
+                    <label>文章内容</label>
+                    <script id="articleModifyBody" name="content" type="text/plain"></script>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="articleModifySubmit">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--分类添加模态框-->
+<div class="modal fade" id="typeModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">添加分类</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="articleTitle">分类标题</label>
+                    <input type="text" class="form-control" id="typeTitle" />
+                </div>
+                <div class="form-group">
+                    <label for="articleTitle">分类排序</label>
+                    <input type="text" class="form-control" id="typeRank" />
+                </div>
+                <div class="form-group" id="SubCategoryType">
+                    <label>所属板块:</label>
+                    <div class="radio">
+                        <label>
+                            <input id="ProCheckType" type="radio" name="SubCategoryType" value="1" checked>
+                            产品介绍
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input id="JiejueCheckType" type="radio" name="SubCategoryType" value="2" checked>
+                            解决方案
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input id="ChenggongCheckType" type="radio" name="SubCategoryType" value="3" checked>
+                            成功案例
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="typeSubmit">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--分类修改模态框-->
+<div class="modal fade" id="typeModifyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改分类</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="articleTitle">分类标题</label>
+                    <input type="text" class="form-control" id="typeModifyTitle" />
+                </div>
+                <div class="form-group">
+                    <label for="articleTitle">分类排序</label>
+                    <input type="text" class="form-control" id="typeModifyRank" />
+                </div>
+                <div class="form-group" id="modifySubCategoryType">
+                    <label>所属板块:</label>
+                    <div class="radio">
+                        <label>
+                            <input id="modifyProCheckType" type="radio" name="modifySubCategoryType" value="1" checked>
+                            产品介绍
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input id="modifyJiejueCheckType" type="radio" name="modifySubCategoryType" value="2" checked>
+                            解决方案
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input id="modifyChenggongCheckType" type="radio" name="modifySubCategoryType" value="3" checked>
+                            成功案例
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="typeModifySubmit">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var libraryUrl = "http://library.html5case.cn";
+    var hesiUrl = "http://hesi.html5case.cn";
+    function getUrl(url, isEncode) {
+        url = url || window.location.href;
+        var obj = {},
+                reg = /([^?&=]+)=([^?&=]+)/g;
+        url.replace(reg, function() {
+            var arg = arguments;
+            obj[arg[1]] = isEncode ? decodeURIComponent(arg[2]) : arg[2];
+        });
+        return obj;
+    }
+    var obj = getUrl(window.location.href,false);
+    var code = obj.code || '';
+    if (code.indexOf("#") != -1) {
+        code = code.substring(0, code.indexOf("#"));
+    }
+    $.ajax({
+        url: libraryUrl + '/Hesi/isLog',
+        async:false,
+        data:{
+            'code': code
+        },
+        type:'post',
+        dataType:'json',
+        success:function(data){
+            if(data.code == -1){
+                window.location.href = hesiUrl + '/admin/login.html';
+            }
+        }
+    });
+    //自定义哈希
+    var hash = '#menu';
+    $(function(){
+        $('.getUserXLS').on('click',function(){
+            window.location.href = libraryUrl + '/Hesi/getXLS';
+        });
+        $('.getMessageXLS').on('click',function(){
+            window.location.href = libraryUrl + '/Hesi/getMessageXLS';
+        });
+        $('.getTypeArticle').on('click',function(){
+            var curid = $("#articleChose  option:selected").attr('curid');
+
+            $.ajax({
+                url: libraryUrl + '/Hesi/getTypeArticle',
+                type:'post',
+                data:{
+                    type:curid
+                },
+                dataType:'json',
+                success:function(data){
+                    $('#article tbody').html('');
+                    console.dir(data);
+                    for(var j=0;j<data.data.length;j++){
+                        $('#article tbody').append('<tr><td>'+data.data[j].category+'</td><td>'+data.data[j].supercategory+'</td><td>'+data.data[j].title+'</td><td>'+data.data[j].author+'</td><td>'+data.data[j].createTime+'</td><td style="text-align: center;"><button type="button" curid="'+data.data[j].id+'" class="btn btn-primary articleModifyBtn">修改</button><button type="button" curid="'+data.data[j].id+'" class="btn btn-danger articleDeleteBtn">删除</button></td></tr>');
+                    }
+                    $('.articleDeleteBtn').on('click',function(e){
+                        var result = confirm('确定要删除吗？一经删除无法恢复');
+                        if(result == true){
+                            $.ajax({
+                                url: libraryUrl + '/Hesi/deleteArticle',
+                                type:'post',
+                                data:{
+                                    id:$(e.target).attr('curid')
+                                },
+                                dataType:'json',
+                                success:function(){
+                                    $(e.target).parents('tr').remove();
+                                }
+                            });
+                        }else{
+
+                        }
+                    });
+                    $('.articleModifyBtn').on('click',function(e){
+                        window.localStorage.setItem('modifyId',$(e.target).attr('curid'));
+                        $('#articleModifyModal').modal();
+                    });
+                }
+            });
+        });
+
+        $('.getTypeCategory').on('click',function(){
+            var curid = $("#subCategoryChose  option:selected").attr('curid');
+
+            $.ajax({
+                url: libraryUrl + '/Hesi/getCategory',
+                type:'post',
+                data:{
+                    super:curid
+                },
+                dataType:'json',
+                success:function(data){
+                    $('#type tbody').html('');
+                    console.dir(data);
+                    for(var j=0;j<data.data.length;j++){
+                        if(data.data[j].superid == 1){
+                            var superCategory = '产品介绍';
+                        }else if(data.data[j].superid == 2){
+                            var superCategory = '解决方案';
+                        }else if(data.data[j].superid == 3){
+                            var superCategory = '成功案例';
+                        } else {
+                            var superCategory = '未分类';
+                        }
+                        $('#type tbody').append('<tr><td>'+superCategory+'</td><td>'+data.data[j].title+'</td><td><button type="button" curid="'+data.data[j].id+'" class="btn btn-primary typeModifyBtn">修改</button><button type="button" curid="'+data.data[j].id+'" class="btn btn-danger typeDeleteBtn">删除</button></td></tr>');
+                    }
+                    $('.typeDeleteBtn').on('click',function(e){
+                        $.ajax({
+                            url: libraryUrl + '/Hesi/deleteCategory',
+                            type:'post',
+                            data:{
+                                id:$(e.target).attr('curid')
+                            },
+                            dataType:'json',
+                            success:function(){
+                                $(e.target).parents('tr').remove();
+                            }
+                        });
+                    });
+                    $('.typeModifyBtn').on('click',function(e){
+                        window.localStorage.setItem('modifyTypeId',$(e.target).attr('curid'));
+                        $('#typeModifyModal').modal();
+                    });
+                }
+            });
+        });
+
+        /*
+        * 文章修改模态框中分类选择
+        * */
+        $('#modifyProCheck').on('click',function(){
+            $.ajax({
+                type:'post',
+                url: libraryUrl + '/Hesi/getCategory',
+                data:{
+                    super:1
+                },
+                dataType:'json',
+                async:false,
+                success:function(data){
+                    $('#articleModifyCategory').html('<label>所属分类:</label>');
+                    for(var i=0;i<data.data.length;i++){
+                        $('#articleModifyCategory').append('<label class="radio-inline"><input type="radio" name="modifyInlineRadioOptions"  value="'+data.data[i].id+'">'+data.data[i].title+'</label>');
+                    }
+                }
+            });
+        });
+        $('#modifyJiejueCheck').on('click',function(){
+            $('#articleModifyCategory').show();
+            $.ajax({
+                type:'post',
+                url: libraryUrl + '/Hesi/getCategory',
+                data:{
+                    super:2
+                },
+                dataType:'json',
+                async:false,
+                success:function(data){
+                    $('#articleModifyCategory').html('<label>所属分类:</label>');
+                    for(var i=0;i<data.data.length;i++){
+                        $('#articleModifyCategory').append('<label class="radio-inline"><input type="radio" name="modifyInlineRadioOptions"  value="'+data.data[i].id+'">'+data.data[i].title+'</label>');
+                    }
+                }
+            });
+        });
+        $('#modifyChenggongCheck').on('click',function(){
+            $('#articleModifyCategory').show();
+            $.ajax({
+                type:'post',
+                url: libraryUrl + '/Hesi/getCategory',
+                data:{
+                    super:3
+                },
+                dataType:'json',
+                async:false,
+                success:function(data){
+                    $('#articleModifyCategory').html('<label>所属分类:</label>');
+                    for(var i=0;i<data.data.length;i++){
+                        $('#articleModifyCategory').append('<label class="radio-inline"><input type="radio" name="modifyInlineRadioOptions"  value="'+data.data[i].id+'">'+data.data[i].title+'</label>');
+                    }
+                }
+            });
+        });
+        $('#modifyNoCheck').on('click',function(){
+            $('#articleModifyCategory').show();
+            $.ajax({
+                type:'post',
+                url: libraryUrl + '/Hesi/getCategory',
+                data:{
+                    super:4
+                },
+                dataType:'json',
+                async:false,
+                success:function(data){
+                    $('#articleModifyCategory').html('<label>所属分类:</label>');
+                    for(var i=0;i<data.data.length;i++){
+                        $('#articleModifyCategory').append('<label class="radio-inline"><input type="radio" name="modifyInlineRadioOptions"  value="'+data.data[i].id+'">'+data.data[i].title+'</label>');
+                    }
+                }
+            });
+        });
+        /*
+         * 文章添加模态框中分类选择
+         * */
+        $('#proCheck').on('click',function(){
+            $.ajax({
+                type:'post',
+                url: libraryUrl + '/Hesi/getCategory',
+                data:{
+                    super:1
+                },
+                dataType:'json',
+                success:function(data){
+                    $('#articleCategory').html('<label>所属分类:</label>');
+                    for(var i=0;i<data.data.length;i++){
+                        $('#articleCategory').append('<label class="radio-inline"><input type="radio" name="inlineRadioOptions"  value="'+data.data[i].id+'">'+data.data[i].title+'</label>');
+                    }
+                }
+            });
+        });
+        $('#jiejueCheck').on('click',function(){
+            $('#articleCategory').show();
+            $.ajax({
+                type:'post',
+                url: libraryUrl + '/Hesi/getCategory',
+                data:{
+                    super:2
+                },
+                dataType:'json',
+                success:function(data){
+                    $('#articleCategory').html('<label>所属分类:</label>');
+                    for(var i=0;i<data.data.length;i++){
+                        $('#articleCategory').append('<label class="radio-inline"><input type="radio" name="inlineRadioOptions"  value="'+data.data[i].id+'">'+data.data[i].title+'</label>');
+                    }
+                }
+            });
+        });
+        $('#chenggongCheck').on('click',function(){
+            $('#articleCategory').show();
+            $.ajax({
+                type:'post',
+                url: libraryUrl + '/Hesi/getCategory',
+                data:{
+                    super:3
+                },
+                dataType:'json',
+                success:function(data){
+                    $('#articleCategory').html('<label>所属分类:</label>');
+                    for(var i=0;i<data.data.length;i++){
+                        $('#articleCategory').append('<label class="radio-inline"><input type="radio" name="inlineRadioOptions"  value="'+data.data[i].id+'">'+data.data[i].title+'</label>');
+                    }
+                }
+            });
+        });
+        $('#noCheck').on('click',function(){
+            $('#articleCategory').show();
+            $.ajax({
+                type:'post',
+                url: libraryUrl + '/Hesi/getCategory',
+                data:{
+                    super:4
+                },
+                dataType:'json',
+                success:function(data){
+                    $('#articleCategory').html('<label>所属分类:</label>');
+                    for(var i=0;i<data.data.length;i++){
+                        $('#articleCategory').append('<label class="radio-inline"><input type="radio" name="inlineRadioOptions"  value="'+data.data[i].id+'">'+data.data[i].title+'</label>');
+                    }
+                }
+            });
+        });
+        checkHash();
+        //导航激活事件
+        $('#navContainer li').on('click',function(e){
+            $(e.target).parent('li').siblings('.active').attr('class','');
+            $(e.target).parent('li').attr('class','active');
+            hash = $(e.target).attr('href');
+            checkHash();
+        });
+        //添加菜单提交事件
+        $('#submitAddMenu').on('click',function(){
+            var menuName = $('#addMenu').val();
+            var menuSide = $("input[name='menuSide']:checked").val();
+            //check name
+            if(!menuName){
+                alert('菜单名称不能为空');
+                return false;
+            }
+            //check menu side
+            if(!menuSide){
+                alert('菜单位置必须选择');
+                return false;
+            }
+
+            //todo:提交给后台提交成功后执行下列代码
+            switch (menuSide){
+                case 'left':
+                        if($(".phonePanel ul:eq(0)").find('li').length > 6){
+                            alert('子菜单个数不能超过5个');
+                            return false;
+                        }else{
+                            $(".phonePanel ul:eq(0)").append("<li>"+menuName+"</li>");
+                            $('.menuContent:eq(0)').append("<option>"+menuName+"</option>");//删除区块添加
+                            $(".phonePanel ul:eq(0)").css('bottom',parseInt($(".phonePanel ul:eq(0)").css('bottom'))+32);
+                        }
+                    break;
+                case 'middle':
+                    if($(".phonePanel ul:eq(1)").find('li').length > 6){
+                        alert('子菜单个数不能超过5个');
+                        return false;
+                    }else{
+                        $(".phonePanel ul:eq(1)").append("<li>"+menuName+"</li>");
+                        $('.menuContent:eq(0)').append("<option>"+menuName+"</option>");//删除区块添加
+                        $(".phonePanel ul:eq(1)").css('bottom',parseInt($(".phonePanel ul:eq(1)").css('bottom'))+32);
+                    }
+                    break;
+                case 'right':
+                    if($(".phonePanel ul:eq(2)").find('li').length > 6){
+                        alert('子菜单个数不能超过5个');
+                        return false;
+                    }else{
+                        $(".phonePanel ul:eq(2)").append("<li>"+menuName+"</li>");
+                        $('.menuContent:eq(0)').append("<option>"+menuName+"</option>");//删除区块添加
+                        $(".phonePanel ul:eq(2)").css('bottom',parseInt($(".phonePanel ul:eq(2)").css('bottom'))+32);
+                    }
+                    break;
+            }
+
+        });
+
+        //删除事件
+        $('#submitDeleteMenu').on('click',function(){
+        });
+
+        $('.menuContent:eq(0)').on('click',function(e){
+            if($(e.target).is('option')){
+                var node = $(e.target);
+                $('.menuContent:eq(1)').append(node);
+            }
+        });
+        $('.menuContent:eq(1)').on('click',function(e){
+            if($(e.target).is('option')){
+                var node = $(e.target);
+                $('.menuContent:eq(0)').append(node);
+            }
+        });
+
+        //留言模态框回复提交按钮
+        $('#replaySubmit').on('click',function(){
+            var id = window.localStorage.getItem('curMessageId');
+            var email = window.localStorage.getItem('email');
+            $.ajax({
+                url: libraryUrl + '/Hesi/insertReplay',
+                type:'post',
+                data:{
+                    id:id,
+                    email:email,
+                    content:$('#replayBody').val()
+                },
+                dataType:'json',
+                success:function(data){
+                    if(data.code == 1){
+                        alert('回复成功');
+                    }else{
+                        alert('已经回复过了');
+                    }
+                }
+            });
+        });
+        $('.typeAddBtn').on('click',function(e){
+            $('#typeModal').modal();
+        });
+    });
+    function cleanMainPanel()
+    {
+        $('#menu').hide();
+        $('#user').hide();
+        $('#message').hide();
+        $('#article').hide();
+        $('#type').hide();
+    }
+    function checkHash()
+    {
+        cleanMainPanel();
+        if(hash == '#user'){
+            $.ajax({
+                url: libraryUrl + '/Hesi/getUser',
+                type:'post',
+                data:{
+                    flag:1
+                },
+                dataType:'json',
+                success:function(data){
+                    $('#user tbody').html('');
+                    console.dir(data);
+                    for(var i=0;i<data.data.length;i++){
+                        $('#user tbody').append('<tr><td>'+data.data[i].nickname+'</td><td>'+data.data[i].name+'</td><td>'+data.data[i].industry+'</td><td>'+data.data[i].company+'</td><td>'+data.data[i].mail+'</td><td>'+data.data[i].tel+'</td><td style="text-align: center;"><p style="display: none;">11</p><button type="button" curid="'+data.data[i].id+'" class="btn btn-danger userDeleteBtn">删除</button></td></tr>');
+                    }
+                    $('.userDeleteBtn').on('click',function(e){
+                        if(window.confirm('一经删除无法取消，确定要删除吗？')){
+                            $.ajax({
+                                url: libraryUrl + '/Hesi/deleteUser',
+                                type:'post',
+                                data:{
+                                    id:$(e.target).attr('curid')
+                                },
+                                dataType:'json',
+                                success:function(){
+                                    $(e.target).parents('tr').remove();
+                                }
+                            });
+                        }else{
+                            return false;
+                        }
+                    });
+                }
+            });
+            $(hash).show();
+        }else if(hash == '#message'){
+            $.ajax({
+                url: libraryUrl + '/Hesi/getMessage',
+                type:'post',
+                data:{
+                    flag:1
+                },
+                dataType:'json',
+                success:function(data){
+                    $('#message tbody').html('');
+                    console.dir(data);
+                    for(var j=0;j<data.data.length;j++){
+                        $('#message tbody').append('<tr><td>'+data.data[j].name+'</td><td>'+data.data[j].industry+'</td><td>'+data.data[j].company+'</td><td>'+data.data[j].mail+'</td><td>'+data.data[j].tel+'</td><td>'+data.data[j].content+'</td><td>'+(data.data[j].replay?data.data[j].replay:"")+'</td><td style="text-align: center;"><button type="button" curid="'+data.data[j].id+'" email="'+data.data[j].mail+'" class="btn btn-primary replayBtn">回复</button><button type="button" curid="'+data.data[j].id+'" class="btn btn-danger messageDeleteBtn">删除</button></td></tr>');
+                    }
+                    $('.messageDeleteBtn').on('click',function(e){
+                        if(window.confirm('一经删除无法取消，确定要删除吗？')){
+                            $.ajax({
+                                url: libraryUrl + '/Hesi/deleteMessage',
+                                type:'post',
+                                data:{
+                                    id:$(e.target).attr('curid')
+                                },
+                                dataType:'json',
+                                success:function(){
+                                    $(e.target).parents('tr').remove();
+                                }
+                            });
+                        }else{
+                            return false;
+                        }
+                    });
+                    //留言部分回复按钮
+                    $('.replayBtn').on('click',function(e){
+                        var id = $(e.target).attr('curid');
+                        var email = $(e.target).attr('email');
+                        window.localStorage.setItem('curMessageId',id);
+                        window.localStorage.setItem('email',email);
+                        $('#replayModal').modal();
+                    });
+                }
+            });
+            $(hash).show();
+        }else if(hash == '#article'){
+            $.ajax({
+                url: libraryUrl + '/Hesi/getAllArticle',
+                type:'post',
+                data:{
+                    flag:1
+                },
+                dataType:'json',
+                success:function(data){
+                    $('#article tbody').html('');
+                    console.dir(data);
+                    for(var j=0;j<data.data.length;j++){
+                        $('#article tbody').append('<tr><td>'+data.data[j].category+'</td><td>'+data.data[j].supercategory+'</td><td>'+data.data[j].title+'</td><td>'+data.data[j].author+'</td><td>'+data.data[j].createTime+'</td><td style="text-align: center;"><button type="button" curid="'+data.data[j].id+'" class="btn btn-primary articleModifyBtn">修改</button><button type="button" curid="'+data.data[j].id+'" class="btn btn-danger articleDeleteBtn">删除</button></td></tr>');
+                    }
+                    $('.articleDeleteBtn').on('click',function(e){
+                        if(window.confirm('一经删除无法取消，确定要删除吗？')){
+                            $.ajax({
+                                url: libraryUrl + '/Hesi/deleteArticle',
+                                type:'post',
+                                data:{
+                                    id:$(e.target).attr('curid')
+                                },
+                                dataType:'json',
+                                success:function(){
+                                    $(e.target).parents('tr').remove();
+                                }
+                            });
+                        }else{
+                            return false;
+                        }
+                    });
+                    $('.articleModifyBtn').on('click',function(e){
+                        window.localStorage.setItem('modifyId',$(e.target).attr('curid'));
+                        $('#articleModifyModal').modal();
+                    });
+                }
+            });
+            $(hash).show();
+        }else if(hash == '#type'){
+            $.ajax({
+                url: libraryUrl + '/Hesi/getAllCategory',
+                type:'post',
+                dataType:'json',
+                success:function(data){
+                    $('#type tbody').html('');
+                    console.dir(data);
+                    for(var j=0;j<data.data.length;j++){
+                        if(data.data[j].superid == 1){
+                            var superCategory = '产品介绍';
+                        }else if(data.data[j].superid == 2){
+                            var superCategory = '解决方案';
+                        }else{
+                            var superCategory = '成功案例';
+                        }
+                        $('#type tbody').append('<tr><td>'+superCategory+'</td><td>'+data.data[j].title+'</td><td><button type="button" curid="'+data.data[j].id+'" class="btn btn-primary typeModifyBtn">修改</button><button type="button" curid="'+data.data[j].id+'" class="btn btn-danger typeDeleteBtn">删除</button></td></tr>');
+                    }
+                    $('.typeDeleteBtn').on('click',function(e){
+                        if(window.confirm('一经删除无法取消，确定要删除吗？')){
+                            $.ajax({
+                                url: libraryUrl + '/Hesi/deleteCategory',
+                                type:'post',
+                                data:{
+                                    id:$(e.target).attr('curid')
+                                },
+                                dataType:'json',
+                                success:function(){
+                                    $(e.target).parents('tr').remove();
+                                }
+                            });
+                        }else{
+                            return false;
+                        }
+                    });
+                    $('.typeModifyBtn').on('click',function(e){
+                        window.localStorage.setItem('modifyTypeId',$(e.target).attr('curid'));
+                        $('#typeModifyModal').modal();
+                    });
+                }
+            });
+            $(hash).show();
+        }else{
+            $(hash).show();
+        }
+    }
+    var ue = UE.getEditor('articleBody');
+    var ueModify = UE.getEditor('articleModifyBody');
+    /*
+    * 文章添加模态框提交按钮
+    * */
+    $('#articleSubmit').on('click',function(){
+        var content = ue.getContent();
+        var title = $('#articleTitle').val();
+        var author = $('#articleAuthor').val();
+        var keyWord = $('#articleKey').val();
+        var otherLink = $('#otherLink').val();
+        var subTitle = $('#subCategory input[type=radio]:checked').val();
+        var category = $('#articleCategory input[type=radio]:checked').val();
+        $.ajax({
+            type:'post',
+            url: libraryUrl + '/Hesi/setArticle',
+            data:{
+                subCategory:subTitle,
+                title:title,
+                author:author,
+                cid:category,
+                body:content,
+                key:keyWord,
+                otherLink:otherLink
+            },
+            dataType:'json',
+            success:function(data){
+                if(data.code == 1){
+                    alert('添加成功');
+                }else{
+                    alert('提交失败，请确认全部项均已填写');
+                }
+            }
+        });
+    });
+    //文章修改模态框出现前填充内容
+    $('#articleModifyModal').on('show.bs.modal',function(){
+        $.ajax({
+            url: libraryUrl + '/Hesi/findArticle',
+            type:'post',
+            data:{
+                id:window.localStorage.getItem('modifyId')
+            },
+            dataType:'json',
+            success:function(data){
+                console.dir(data);
+                $('#articleModifyTitle').val(data.data[0].title);
+                $('#articleModifyAuthor').val(data.data[0].author);
+                $('#articleModifyKey').val(data.data[0].key_word);
+                $('#otherModifyLink').val(data.data[0].otherLink);
+                $('#modifySubCategory input[value='+data.data[0].subCategory+']').click();
+                $('#articleModifyCategory input[value='+data.data[0].cid+']').attr('checked', 'checked');
+                ueModify.setContent(data.data[0].body);
+            }
+        });
+    });
+    $('#articleModifySubmit').on('click',function(){
+        var content = ueModify.getContent();
+        var title = $('#articleModifyTitle').val();
+        var author = $('#articleModifyAuthor').val();
+        var key = $('#articleModifyKey').val();
+        var otherLink = $('#otherModifyLink').val();
+        var subCategory = $('#modifySubCategory input[type=radio]:checked').val();
+        var category = $('#articleModifyCategory input[type=radio]:checked').val();
+        $.ajax({
+            type:'post',
+            url: libraryUrl + '/Hesi/modifyArticle',
+            data:{
+                id:window.localStorage.getItem('modifyId'),
+                subCategory:subCategory,
+                title:title,
+                author:author,
+                cid:category,
+                body:content,
+                key:key,
+                otherLink:otherLink
+            },
+            dataType:'json',
+            success:function(data){
+                if(data.code == 1){
+                    alert('修改成功');
+                }else{
+                    alert('提交失败，请确认全部项均已填写');
+                }
+            }
+        });
+    });
+
+    //分类修改模态框出现前填充内容
+    $('#typeModifyModal').on('show.bs.modal',function(){
+        $.ajax({
+            url: libraryUrl + '/Hesi/getCurCategory',
+            type:'post',
+            data:{
+                id:window.localStorage.getItem('modifyTypeId')
+            },
+            dataType:'json',
+            success:function(data){
+                console.dir(data);
+                $('#typeModifyTitle').val(data.data[0].title);
+                $('#typeModifyRank').val(data.data[0].rank);
+                $('#modifySubCategoryType input[value='+data.data[0].superid+']').attr('checked','checked');
+            }
+        });
+    });
+    $('#typeModifySubmit').on('click',function(){
+        var title = $('#typeModifyTitle').val();
+        var rank = $('#typeModifyRank').val();
+        var subCategory = $('#modifySubCategoryType input[type=radio]:checked').val();
+        $.ajax({
+            type:'post',
+            url: libraryUrl + '/Hesi/modifyCategory',
+            data:{
+                id:window.localStorage.getItem('modifyTypeId'),
+                title:title,
+                superid:subCategory,
+                rank:rank,
+            },
+            dataType:'json',
+            success:function(data){
+                if(data.code == 1){
+                    alert('修改成功');
+                }else{
+                    alert('提交失败，请确认全部项均已填写');
+                }
+            }
+        });
+    });
+    $('#typeSubmit').on('click',function(){
+        var title = $('#typeTitle').val();
+        var rank = $('#typeRank').val();
+        var subCategory = $('#SubCategoryType input[type=radio]:checked').val();
+        $.ajax({
+            type:'post',
+            url: libraryUrl + '/Hesi/setCategory',
+            data:{
+                title:title,
+                rank:rank,
+                super:subCategory
+            },
+            dataType:'json',
+            success:function(data){
+                if(data.code == 1){
+                    alert('添加成功');
+                }else{
+                    alert(data.msg);
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

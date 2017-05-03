@@ -1,0 +1,46 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+body{	
+   background-color: white;
+   font: normal 100% Helvetica, Arial, sans-serif;
+}
+img{
+	max-width: 100%;
+}
+
+/*内容*/
+.content{
+	width: 100%;
+	margin: 20px auto;
+	background-color: white;
+}
+.title {
+	text-align: center;
+	color: #000000;
+	padding: 7px;
+	border-bottom: 1px solid #D2D2D2;
+}
+
+.date{
+	text-align: center;
+	color: #8E8E8E;
+	font-size: 14px;
+	padding: 15px;
+}
+.date h5{
+	float: left;
+	margin-right: 5%;
+}
+
+/*clearfix*/
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
