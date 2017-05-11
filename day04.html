@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
 		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
 	</head>
+
 	<body>
 		<div id="content"></div>
-		
-		<script>
-			$(document).ready(function() {
-				ajaxload("https://www.baidu.com")
 
-				function ajaxload(local) {
-					htmlobj = $.ajax({
-						url: local,
-						async: false
-					});
-					$("#content").html(htmlobj.responseText);
-				}
-			});
+		<iframe src="https://www.baidu.com" frameborder="0" width="100%" scrolling="no" id="test" onload="this.height=100"></iframe>
+		<script type="text/javascript">
+			function reinitIframe() {
+				var iframe = document.getElementById("test");
+				try {
+					var bHeight = iframe.contentWindow.document.body.scrollHeight;
+					var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+					var height = Math.max(bHeight, dHeight);
+					iframe.height = height;
+					console.log(height);
+				} catch(ex) {}
+			}
+			window.setInterval("reinitIframe()", 200);
 		</script>
+
 	</body>
+
 </html>
