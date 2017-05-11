@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="content"></div>
+		
+		<script>
+			$(document).ready(function() {
+				ajaxload("http://hesi.html5case.cn/index.html")
+
+				function ajaxload(local) {
+					htmlobj = $.ajax({
+						url: local,
+						async: false
+					});
+					$("#content").html(htmlobj.responseText);
+				}
+			});
+		</script>
+	</body>
+</html>

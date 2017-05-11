@@ -1,0 +1,32 @@
+body {
+	padding-bottom: 70px;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body:before {
+	content: ' ';
+	position: fixed;
+	z-index: -1;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: url(../img/bg_main.png) center 0 no-repeat;
+	background-size: cover;
+}
+
+.list_group_m {
+	background-color: #cc85d9;
+	width: 100%;
+	position: absolute;
+	top: 0px;
+	overflow: scroll;
+	bottom: 70px;
+	left: 0px;
+}
+
+.list_item_m {}
