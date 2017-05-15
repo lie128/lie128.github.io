@@ -26,7 +26,7 @@ body {
 	background-color: #fff;
 }
 
-.music> img:first-of-type {
+.music>img:first-of-type {
 	position: absolute;
 	top: 24%;
 	right: 2.5%;
@@ -34,7 +34,7 @@ body {
 	z-index: 1;
 }
 
-.music> img:last-of-type {
+.music>img:last-of-type {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -45,7 +45,7 @@ body {
 	z-index: 0;
 }
 
-.music> img.play {
+.music>img.play {
 	-webkit-animation: music_disc 4s linear infinite;
 	-o-animation: music_disc 4s linear infinite;
 	animation: music_disc 4s linear infinite;
@@ -105,7 +105,7 @@ body {
 	height: 100%;
 }
 
-.page> .bg {
+.page>.bg {
 	position: absolute;
 	z-index: -1;
 	width: 100%;
@@ -116,12 +116,12 @@ body {
 	display: block;
 }
 
-#page1> .bg {
+#page1>.bg {
 	background: url(../img_card/p1_bg.jpg) no-repeat center center;
 	background-size: 100% 100%;
 }
 
-#page1> .p1_lantern {
+#page1>.p1_lantern {
 	position: absolute;
 	top: -3.4%;
 	right: 0;
@@ -143,7 +143,7 @@ body {
 	box-sizing: border-box;
 }
 
-#page1> .p1_lantern:before {
+#page1>.p1_lantern:before {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -189,7 +189,7 @@ body {
 	}
 }
 
-#page1> .p1_imooc {
+#page1>.p1_imooc {
 	position: absolute;
 	right: 0;
 	left: 0;
@@ -201,7 +201,7 @@ body {
 	margin: auto;
 }
 
-#page1> .p1_words {
+#page1>.p1_words {
 	font-size: 2.134rem;
 	position: absolute;
 	right: 0;
@@ -216,18 +216,44 @@ body {
 	-webkit-transition: .5s;
 	transition: .5s;
 }
+
 #page2.fadeOut {
 	opacity: .3;
-	-webkit-transform: translate(0,-100%);
-	transform: translate(0,-100%);
+	-webkit-transform: translate(0, -100%);
+	transform: translate(0, -100%);
 }
 
-#page2> .bg {
+#page2>.p2_bg_loading {
+	z-index: 4;
+	background: #EF1639;
+	-webkit-animation: p2_bg_loading 1s linear forwards;
+	animation: p2_bg_loading 1s linear forwards;
+}
+
+@-webkit-keyframes p2_bg_loading {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes p2_bg_loading {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+#page2>.bg {
 	background: url(../img_card/p2_bg.jpg) no-repeat center center;
 	background-size: 100% 100%;
 }
 
-#page2> .p2_circle {
+#page2>.p2_circle {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -265,7 +291,7 @@ body {
 	}
 }
 
-#page2> .p2_circle:before {
+#page2>.p2_circle:before {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -304,7 +330,7 @@ body {
 	}
 }
 
-#page2> .p2_circle:after {
+#page2>.p2_circle:after {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -343,7 +369,7 @@ body {
 	}
 }
 
-#page2> .p2_2016 {
+#page2>.p2_2016 {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -362,17 +388,17 @@ body {
 	transition: .5s;
 }
 
-#page3.fadeIn{
-	-webkit-transform: translate(0,-100%);
-	transform: translate(0,-100%);
+#page3.fadeIn {
+	-webkit-transform: translate(0, -100%);
+	transform: translate(0, -100%);
 }
 
-#page3 > .bg {
+#page3>.bg {
 	background: url(../img_card/p3_bg.jpg) no-repeat center center;
 	background-size: 100% 100%;
 }
 
-#page3> .p3_logo {
+#page3>.p3_logo {
 	width: 34.687vw;
 	height: 6.327vh;
 	position: absolute;
@@ -384,7 +410,7 @@ body {
 	background-size: 100%;
 }
 
-#page3> .p3_title {
+#page3>.p3_title {
 	width: 48.125vw;
 	height: 50vh;
 	position: absolute;
@@ -396,7 +422,7 @@ body {
 	background-size: 100%;
 }
 
-#page3> .p3_second {
+#page3>.p3_second {
 	width: 22.8125vw;
 	height: 41.652vh;
 	position: absolute;
@@ -406,7 +432,7 @@ body {
 	background-size: 100%;
 }
 
-#page3> .p3_first {
+#page3>.p3_first {
 	width: 22.8125vw;
 	height: 41.652vh;
 	position: absolute;
@@ -416,7 +442,7 @@ body {
 	background-size: 100%;
 }
 
-#page3> .p3_blessing {
+#page3>.p3_blessing {
 	width: 32vw;
 	height: 32vw;
 	position: absolute;
