@@ -72,6 +72,7 @@ header {
 	text-align: center;
 	position: relative;
 	padding: 0 .05rem;
+	overflow: hidden;
 	border-bottom: 1px solid #d7d7d7;
 }
 
