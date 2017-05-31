@@ -1,0 +1,226 @@
+html {
+	overflow-y: scroll;
+	width: 100%;
+	font-size: 100px;
+	font-family: "Helvetica Neue", Helvetica, Tahoma, sans-serif;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	background-color: #fff;
+	color: #333;
+	line-height: 1.5;
+	font-size: .14rem;
+	text-align: center;
+}
+
+/*标题栏*/
+header {
+	width: 100%;
+	height: .45rem;
+	background-color: #f9f9f9;
+	color: #616161;
+	font-size: .17rem;
+	text-align: center;
+	line-height: .45rem;
+	border-bottom: 1px solid #bbb;
+}
+
+/*返回按钮,清除按钮,一个月登录打勾按钮*/
+.icon {
+	display: block;
+	width: .22rem;
+	height: .22rem;
+	position: absolute;
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	overflow: hidden;
+	background-image: url(../img_jd/iconBg.png);
+}
+
+/*返回按钮*/
+.icon-goback {
+	top: .12rem;
+	left: .12rem;
+	background-position: 0 -.63rem;
+}
+
+/*编辑框删除按钮*/
+.icon-clear{
+	top: .13rem;
+	right: .1rem;
+	background-position: 0 0;
+}
+
+.page {
+	padding: 0 .2rem .2rem .2rem;
+}
+
+.loginPage {
+	padding-top: .05rem;
+}
+
+/*编辑框容器*/
+.input-container {
+	width: 100%;
+	height: .48rem;
+	line-height: .48rem;
+	text-align: center;
+	position: relative;
+	padding: 0 .05rem;
+	border-bottom: 1px solid #d7d7d7;
+}
+
+/*编辑框左侧的label*/
+.input-container > div {
+	width: .6rem;
+	text-align: left;
+	position: absolute;
+	display: inline-block;
+	font-family: PingFang-SC-Regular;
+}
+
+/*编辑框*/
+.acc-input {
+	width: 100%;
+	height: .44rem;
+	left: .6rem;
+	border: none;
+	border-radius: 0;
+	display: inline-block;
+	font-family: PingFang-SC-Regular;
+}
+
+/*帐号*/
+.username {
+	padding: 0 .3rem 0 .6rem;
+}
+
+/*密码*/
+.password {
+	padding: 0 .7rem 0 .6rem;
+}
+
+/*验证码*/
+.imgverify {
+	padding: 0 .8rem 0 .6rem;
+}
+
+/*登录提示*/
+.notice{
+	font-size: .12rem;
+	line-height: .3rem;
+	color: #f23030;
+	min-height: .15rem;
+	text-align: left;
+}
+
+/*登录,一键登录按钮*/
+.btn{
+	display: block;
+	height: .45rem;
+	line-height: .45rem;
+	background-color: #eee;
+	border-radius: 2px;
+	border: 0;
+	font-size: .14rem;
+	color: #848689;
+}
+
+/*一键登录*/
+.btn-onestep{
+	border: 1px solid #f23030;
+	background-color: #fff;
+	color: #f23030;
+	margin-top: .1rem;
+}
+
+.quick-nav{
+	margin-top: .2rem;
+}
+
+.remberme{
+	text-indent: .25rem;
+	display: inline-block;
+	color: #333;
+	float: left;
+	line-height: .22rem;
+	font-size: .12rem;
+}
+
+.remberme > input{
+	display: none;
+}
+
+/*找回密码,快速注册*/
+.quick-nav > a{
+	color: #333;
+	text-indent: .25rem;
+	line-height: .22rem;
+	font-family: PingFang-SC-Regular;
+	display: inline-block;
+	font-size: .12rem;
+}
+
+.quick-nav a:last-child{
+	float: right;
+}
+
+.icon-rember{
+	background-position: 0 -105px;
+}
+
+.icon-clock{
+	background-position: 0 -.23rem;
+}
+
+.icon-reg{
+	background-position: 0 -.42rem;
+}
+
+/*其他登录方式*/
+.quick-login{
+	position: relative;
+	margin-top: 1.05rem;
+	height: .55rem;
+	padding: .245rem .1rem 0 .1rem;
+	border-top: 1px solid #d7d7d7;
+}
+
+.quick-login > h4{
+	position: absolute;
+	top: -.19rem;
+	left: 50%;
+	background-color: white;
+	color: #bfbfbf;
+	padding: .05rem .15rem;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+}
+
+.quick-login a{
+	position: relative;
+	width: .72rem;
+	color: #616161;
+	margin: 0 .1rem;
+	font-size: .14rem;
+	display: inline-block;
+}
+
+.quick-login span{
+	line-height: .23rem;
+}
+
+.icon-qq{
+	left: .25rem;
+	background-position: 0 -1.29rem;
+}
+
+.icon-wechat{
+	left: .25rem;
+	background-position: 0 -1.55rem;
+}
