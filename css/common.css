@@ -1,22 +1,28 @@
-*{
+* {
 	margin: 0;
 	padding: 0;
 }
 
+
 /*去掉链接的下划线*/
-a{
+
+a {
 	text-decoration: none;
-}
-
-ol, ul {
-	list-style: none;
-}
-
-input{
 	outline: 0;
 }
 
+ol,
+ul {
+	list-style: none;
+}
+
+input {
+	outline: 0;
+}
+
+
 /*输入框提示颜色*/
+
 input:-moz-placeholder,
 textarea:-moz-placeholder {
 	color: #ccc
@@ -37,5 +43,13 @@ textarea::-webkit-input-placeholder {
 	color: #ccc
 }
 
+.clearfix {
+	zoom: 1;
+}
 
-
+.clearfix:after {
+	content: '';
+	display: block;
+	height: 0;
+	clear: both;
+}
