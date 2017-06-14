@@ -43,7 +43,7 @@
 
 /*icon*/
 [class^='ico'], [class*=' ico'] { display: inline-block; width: 1em; height: 1em; background-image: url(../img/ico.png); vertical-align: middle; margin-top: -0.2em; }
-/*.ico1 { background-position-y: 0%;}
+.ico1 { background-position-y: 0%;}
 .ico2 { background-position-y: 10%;}
 .ico3 { background-position-y: 20%;}
 .ico4 { background-position-y: 30%;}
@@ -53,21 +53,21 @@
 .ico8 { background-position-y: 70%;}
 .ico9 { background-position-y: 80%;}
 .ico10 { background-position-y: 90%;}
-.ico11 { background-position-y: 100%;}*/
-.ico1 { background-position-y: 0%;}
-.ico0 { background-image: url(../img/ico1.png);}
-.ico2 { background-image: url(../img/ico2.png);}
-.ico3 { background-image: url(../img/ico3.png);}
-.ico4 { background-image: url(../img/ico4.png);}
-.ico5 { background-image: url(../img/ico5.png);}
-.ico6 { background-image: url(../img/ico6.png);}
-.ico7 { background-image: url(../img/ico7.png);}
-.ico8 { background-image: url(../img/ico8.png);}
-.ico9 { background-image: url(../img/ico9.png);}
-.ico10 { background-image: url(../img/ico10.png);}
-.ico11 { background-image: url(../img/ico11.png);}
-.ico12 { background-image: url(../img/ico12.png);}
-.ico13 { background-image: url(../img/ico13.png);}
+.ico11 { background-position-y: 100%;}
+
+.icon1 { background-image: url(../img/ico1.png);}
+.icon2 { background-image: url(../img/ico2.png);}
+.icon3 { background-image: url(../img/ico3.png);}
+.icon4 { background-image: url(../img/ico4.png);}
+.icon5 { background-image: url(../img/ico5.png);}
+.icon6 { background-image: url(../img/ico6.png);}
+.icon7 { background-image: url(../img/ico7.png);}
+.icon8 { background-image: url(../img/ico8.png);}
+.icon9 { background-image: url(../img/ico9.png);}
+.icon10 { background-image: url(../img/ico10.png);}
+.icon11 { background-image: url(../img/ico11.png);}
+.icon12 { background-image: url(../img/ico12.png);}
+.icon13 { background-image: url(../img/ico13.png);}
 
 /*user*/
 [class^='user'], [class*=' user'] { background-image: url(../img/user.jpg); background-position-y: 9999%;}
